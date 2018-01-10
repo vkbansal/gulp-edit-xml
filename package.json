@@ -1,37 +1,38 @@
 {
-  "name": "gulp-edit-xml",
-  "version": "2.0.0",
-  "description": "Gulp plugin for editing xml files",
-  "main": "index.js",
-  "scripts": {
-    "test": "jasmine-node test/edit-xml-spec.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/vkbansal/gulp-edit-xml.git"
-  },
-  "keywords": [
-    "gulp",
-    "plugin",
-    "gulpplugin",
-    "xml",
-    "svg"
-  ],
-  "author": "Vivek Kumar Bansal <contact@vkbansal.me>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/vkbansal/gulp-edit-xml/issues"
-  },
-  "homepage": "https://github.com/vkbansal/gulp-edit-xml",
-  "dependencies": {
-    "gulp-util": "^3.0.4",
-    "lodash.isfunction": "^3.0.6",
-    "lodash.isobject": "^3.0.2",
-    "object-assign": "^4.0.1",
-    "xml2js": "^0.4.8"
-  },
-  "devDependencies": {
-    "event-stream": "^3.3.1",
-    "jasmine-node": "^1.14.5"
-  }
+    "name": "gulp-edit-xml",
+    "version": "2.0.0",
+    "description": "Gulp plugin for editing xml files",
+    "main": "index.js",
+    "scripts": {
+        "test": "jasmine-node test/edit-xml-spec.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/vkbansal/gulp-edit-xml.git"
+    },
+    "keywords": [
+        "gulp",
+        "plugin",
+        "gulpplugin",
+        "xml",
+        "svg"
+    ],
+    "author": "Vivek Kumar Bansal <contact@vkbansal.me>",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/vkbansal/gulp-edit-xml/issues"
+    },
+    "homepage": "https://github.com/vkbansal/gulp-edit-xml",
+    "dependencies": {
+        "lodash.isfunction": "^3.0.6",
+        "lodash.isobject": "^3.0.2",
+        "object-assign": "^4.0.1",
+        "plugin-error": "^0.1.2",
+        "xml2js": "^0.4.8"
+    },
+    "devDependencies": {
+        "event-stream": "^3.3.1",
+        "jasmine-node": "^1.14.5",
+        "vinyl": "^2.1.0"
+    }
 }

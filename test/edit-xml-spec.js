@@ -1,71 +1,71 @@
-var xmlEdit = require('../index.js'),
-    gutil = require('gulp-util'),
-    es = require('event-stream');
+const xmlEdit = require('../index.js');
+const es = require('event-stream');
+const Vinyl = require('vinyl');
 
-describe('gulp-xml-edit', function(){
+describe('gulp-xml-edit', function() {
+    it('should work in buffer mode', function(done) {
+        const stream = xmlEdit();
+        const fakeBuffer = new Buffer('<svg/>');
+        const fakeFile = new Vinyl({ contents: fakeBuffer });
 
-    it('should work in buffer mode', function(done){
-        var stream = xmlEdit(),
-            fakeBuffer = new Buffer('<svg/>'),
-            fakeFile = new gutil.File({ contents: fakeBuffer });
+        stream.on('data', file => expect(file.contents.toString()).toEqual(fakeBuffer.toString()));
+        stream.on('end', () => done());
+        stream.write(fakeFile);
+        stream.end();
+    });
 
-        stream.on('data', function(file){
-            expect(file.contents.toString()).toEqual(fakeBuffer.toString());
-        });
+    it('should let null files pass through', function(done) {
+        const stream = xmlEdit();
+        const fakeFile = new Vinyl({ path: 'null.md', contents: null });
+        let n = 0;
 
-        stream.on('end', function() {
-            done();
-        });
+        stream.pipe(
+            es.through(
+                file => {
+                    expect(file.path).toBe('null.md');
+                    expect(file.contents).toBe(null);
+                    n++;
+                },
+                () => {
+                    expect(n).toBe(1);
+                    done();
+                }
+            )
+        );
 
         stream.write(fakeFile);
         stream.end();
     });
 
-     it('should let null files pass through', function(done) {
-        var stream = xmlEdit(),
+    it('should transform as expected', function(done) {
+        const stream = xmlEdit(data => {
+            delete data.svg.g[0].circle[0].$.transform;
+            return data;
+        });
+        const fakeBuffer = new Buffer(
+            "<svg><g><circle cx='20' cy='20' cr='20' transform='translate(20 20)'/></g></svg>"
+        );
+        const fakeFile = new Vinyl({
+            contents: fakeBuffer
+        });
+        let n = 0;
 
-            fakeFile = new gutil.File({path: 'null.md', contents: null}),
-
-            n = 0;
-
-        stream.pipe(es.through(function(file) {
-            expect(file.path).toBe('null.md');
-            expect(file.contents).toBe(null);
-            n++;
-        }, function() {
-            expect(n).toBe(1);
-            done();
-        }));
+        stream.pipe(
+            es.through(
+                file => {
+                    expect(file.contents.toString()).toBe(
+                        '<svg><g><circle cx="20" cy="20" cr="20"/></g></svg>'
+                    );
+                    n++;
+                },
+                () => {
+                    expect(n).toBe(1);
+                    done();
+                }
+            )
+        );
 
         stream.write(fakeFile);
         stream.end();
     });
-
-    it('should transform as expected', function(done){
-
-        var stream = xmlEdit(function(data){
-                delete data.svg.g[0].circle[0].$.transform;
-                return data;
-            }),
-
-            fakeBuffer = new Buffer("<svg><g><circle cx='20' cy='20' cr='20' transform='translate(20 20)'/></g></svg>"),
-
-            fakeFile = new gutil.File({
-                contents: fakeBuffer
-            }),
-
-            n = 0;
-
-        stream.pipe(es.through(function(file) {
-            expect(file.contents.toString()).toBe('<svg><g><circle cx="20" cy="20" cr="20"/></g></svg>');
-            n++;
-        }, function() {
-            expect(n).toBe(1);
-            done();
-        }));
-
-        stream.write(fakeFile);
-        stream.end();
-
-     });
 });
