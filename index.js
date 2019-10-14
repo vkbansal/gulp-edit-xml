@@ -42,7 +42,7 @@ const xmlEdit = function(transform, options) {
         const builder = new xml2js.Builder(settings.builderOptions);
 
         parser.parseString(content, function(err, data) {
-            let content = transform.call(null, data);
+            let content = transform.call(null, data, file);
 
             if (!isObject(content)) {
                 done(new PluginError('gulp-xml-edit', 'transformation does not returns an object'));

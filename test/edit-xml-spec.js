@@ -68,4 +68,40 @@ describe('gulp-xml-edit', function() {
         stream.write(fakeFile);
         stream.end();
     });
+
+    it('should pass the raw file to the transform', () => {
+        let captured = null;
+        const stream = xmlEdit((data, file) => {
+            delete data.svg.g[0].circle[0].$.transform;
+            captured = file.name;
+            return data;
+        });
+        const fakeBuffer = new Buffer(
+            "<svg><g><circle cx='20' cy='20' cr='20' transform='translate(20 20)'/></g></svg>"
+        );
+        const fakeFile = new Vinyl({
+            contents: fakeBuffer,
+            name: "expected.xml"
+        });
+        let n = 0;
+
+        stream.pipe(
+            es.through(
+                file => {
+                    expect(file.contents.toString()).toBe(
+                        '<svg><g><circle cx="20" cy="20" cr="20"/></g></svg>'
+                    );
+                    n++;
+                },
+                () => {
+                    expect(captured).not.toBe(null);
+                    expect(captured).toBe("expected.xml");
+                    done();
+                }
+            )
+        );
+
+        stream.write(fakeFile);
+        stream.end();
+    });
 });
