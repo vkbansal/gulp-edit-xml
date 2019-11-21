@@ -67,16 +67,21 @@ gulp.task('svg', function() {
 
 Its takes two optional arguments:
 
-```
-xmlEdit(transform,options)
+```js
+xmlEdit(transform, options, file);
 ```
 
-**transform:** A function that can be used to do manual operations. It takes one argument: The `xml` as an object. _Remember to return the object at end_.
+**transform:** A function that can be used to do manual operations. It takes two arguments:
+
+- The `xml` as an object.
+- The original raw file
+
+_Remember to return the object at end_.
 
 default:
 
 ```js
-function(data){
+function(data, file){
     return data;
 }
 ```
