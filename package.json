@@ -1,46 +1,48 @@
 {
-    "name": "gulp-edit-xml",
-    "version": "3.0.0",
-    "description": "Gulp plugin for editing xml files",
-    "main": "index.js",
-    "scripts": {
-        "test": "jest src",
-        "lint": "eslint src && prettier --check src/*.js"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/vkbansal/gulp-edit-xml.git"
-    },
-    "files": [
-        "src",
-        "index.js"
-    ],
-    "keywords": [
-        "gulp",
-        "plugin",
-        "gulpplugin",
-        "xml",
-        "svg"
-    ],
-    "author": "Vivek Kumar Bansal <contact@vkbansal.me>",
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/vkbansal/gulp-edit-xml/issues"
-    },
-    "homepage": "https://github.com/vkbansal/gulp-edit-xml",
-    "dependencies": {
-        "lodash.isfunction": "^3.0.6",
-        "lodash.isobject": "^3.0.2",
-        "plugin-error": "^1.0.1",
-        "xml2js": "^0.4.8"
-    },
-    "devDependencies": {
-        "eslint": "^6.6.0",
-        "eslint-config-prettier": "^6.7.0",
-        "event-stream": "^4.0.1",
-        "jest": "^24.9.0",
-        "lodash.defaultsdeep": "^4.6.1",
-        "prettier": "^1.19.1",
-        "vinyl": "^2.1.0"
-    }
+  "name": "gulp-edit-xml",
+  "version": "3.0.0",
+  "description": "Gulp plugin for editing xml files",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "scripts": {
+    "test": "jest src",
+    "lint": "eslint src && prettier --check src/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vkbansal/gulp-edit-xml.git"
+  },
+  "files": [
+    "src",
+    "index.js"
+  ],
+  "keywords": [
+    "gulp",
+    "plugin",
+    "gulpplugin",
+    "xml",
+    "svg"
+  ],
+  "author": "Vivek Kumar Bansal <contact@vkbansal.me>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vkbansal/gulp-edit-xml/issues"
+  },
+  "homepage": "https://github.com/vkbansal/gulp-edit-xml",
+  "dependencies": {
+    "@types/xml2js": "^0.4.5",
+    "lodash.isfunction": "^3.0.6",
+    "lodash.isobject": "^3.0.2",
+    "plugin-error": "^1.0.1",
+    "xml2js": "^0.4.8"
+  },
+  "devDependencies": {
+    "eslint": "^6.6.0",
+    "eslint-config-prettier": "^6.7.0",
+    "event-stream": "^4.0.1",
+    "jest": "^24.9.0",
+    "lodash.defaultsdeep": "^4.6.1",
+    "prettier": "^1.19.1",
+    "vinyl": "^2.1.0"
+  }
 }
