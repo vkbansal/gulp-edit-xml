@@ -1,0 +1,28 @@
+name: Pull request checks
+on:
+  pull_request:
+    types: [opened, reopened, ready_for_review, synchronize, edited]
+
+jobs:
+  lint:
+    name: ESLint
+    runs-on: ubuntu-latest
+    #if: !contains(github.event.pull_request.title , '[skip ci]')
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Lint Check
+        run: |
+          yarn
+          yarn lint
+  test:
+    name: Unit tests
+    runs-on: ubuntu-latest
+    #if: !contains(github.event.pull_request.title , '[skip ci]')
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Test
+        run: |
+          yarn
+          yarn test
