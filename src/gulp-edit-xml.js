@@ -2,7 +2,7 @@ const Stream = require('stream');
 const xml2js = require('xml2js');
 const isFunction = require('lodash.isfunction');
 const isObject = require('lodash.isobject');
-const assign = require('object-assign');
+const assign = require('lodash.defaultsdeep');
 const PluginError = require('plugin-error');
 
 const xmlEdit = function(transform, options) {
@@ -22,7 +22,7 @@ const xmlEdit = function(transform, options) {
     }
   };
 
-  const settings = assign(defaults, options);
+  const settings = assign(options, defaults);
 
   const stream = new Stream.Transform({ objectMode: true });
 
