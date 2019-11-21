@@ -4,12 +4,17 @@
     "description": "Gulp plugin for editing xml files",
     "main": "index.js",
     "scripts": {
-        "test": "jasmine-node test/edit-xml-spec.js"
+        "test": "jest src",
+        "lint": "eslint src && prettier --check src/*.js"
     },
     "repository": {
         "type": "git",
         "url": "https://github.com/vkbansal/gulp-edit-xml.git"
     },
+    "files": [
+        "src",
+        "index.js"
+    ],
     "keywords": [
         "gulp",
         "plugin",
@@ -27,12 +32,15 @@
         "lodash.isfunction": "^3.0.6",
         "lodash.isobject": "^3.0.2",
         "object-assign": "^4.0.1",
-        "plugin-error": "^0.1.2",
+        "plugin-error": "^1.0.1",
         "xml2js": "^0.4.8"
     },
     "devDependencies": {
-        "event-stream": "^3.3.1",
-        "jasmine-node": "^1.14.5",
+        "eslint": "^6.6.0",
+        "eslint-config-prettier": "^6.7.0",
+        "event-stream": "^4.0.1",
+        "jest": "^24.9.0",
+        "prettier": "^1.19.1",
         "vinyl": "^2.1.0"
     }
 }
