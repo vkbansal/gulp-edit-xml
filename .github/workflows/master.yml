@@ -25,4 +25,4 @@ jobs:
       - name: Test
         run: |
           yarn
-          yarn tests
+          yarn test
