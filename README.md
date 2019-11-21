@@ -1,4 +1,7 @@
-[![NPM version](https://badge.fury.io/js/gulp-edit-xml.svg)](http://badge.fury.io/js/gulp-edit-xml) [![Build Status](https://travis-ci.org/vkbansal/gulp-edit-xml.svg?branch=master)](https://travis-ci.org/vkbansal/gulp-edit-xml) [![Dependencies](https://david-dm.org/vkbansal/gulp-edit-xml.png)](https://david-dm.org/vkbansal/gulp-edit-xml) [![devDependency Status](https://david-dm.org/vkbansal/gulp-edit-xml/dev-status.svg)](https://david-dm.org/vkbansal/gulp-edit-xml#info=devDependencies)
+[![NPM version](https://badge.fury.io/js/gulp-edit-xml.svg)](http://badge.fury.io/js/gulp-edit-xml)
+[![Build Status](https://github.com/vkbansal/gulp-edit-xml/workflows/master/badge.svg)](https://travis-ci.org/vkbansal/gulp-edit-xml)
+[![Dependencies](https://david-dm.org/vkbansal/gulp-edit-xml.png)](https://david-dm.org/vkbansal/gulp-edit-xml)
+[![devDependency Status](https://david-dm.org/vkbansal/gulp-edit-xml/dev-status.svg)](https://david-dm.org/vkbansal/gulp-edit-xml#info=devDependencies)
 
 # gulp-edit-xml
 
@@ -26,37 +29,37 @@ So I made the script into a gulp plugin to integrate it in my build process.
 
 ```js
 var gulp = require('gulp'),
-    svgo = require('gulp-svgo'),
-    xmlEdit = require('gulp-edit-xml');
+  svgo = require('gulp-svgo'),
+  xmlEdit = require('gulp-edit-xml');
 
 gulp.task('svg', function() {
-    gulp
-        .src('src/img/main.svg')
-        .pipe(svgo())
-        .pipe(
-            xmlEdit(function(xml) {
-                var nodes = xml.svg.g[0].circle;
-                for (var i = 0, l = nodes.length; i < l; i++) {
-                    var cn = nodes[i].$;
-                    if (cn.hasOwnProperty('transform')) {
-                        var transforms = cn.transform.match(/translate\(([\d\s\-\.]+)\)/)[1];
-                        transforms = transforms.split(' ');
-                        cn.cx = parseInt(cn.cx) + parseInt(transforms[0]);
-                        cn.cx = Math.round(cn.cx * 10) / 10;
-                        if (transforms.length == 2) {
-                            cn.cy = parseInt(cn.cy) + parseInt(transforms[1]);
-                            cn.cy = Math.round(cn.cy * 10) / 10;
-                        }
-                        delete cn.transform;
-                        delete cn.fill;
-                    }
-                    nodes[i].$ = cn;
-                }
-                xml.svg.g[0].circle = nodes;
-                return xml;
-            })
-        )
-        .pipe(gulp.dest('dist/img/'));
+  gulp
+    .src('src/img/main.svg')
+    .pipe(svgo())
+    .pipe(
+      xmlEdit(function(xml) {
+        var nodes = xml.svg.g[0].circle;
+        for (var i = 0, l = nodes.length; i < l; i++) {
+          var cn = nodes[i].$;
+          if (cn.hasOwnProperty('transform')) {
+            var transforms = cn.transform.match(/translate\(([\d\s\-\.]+)\)/)[1];
+            transforms = transforms.split(' ');
+            cn.cx = parseInt(cn.cx) + parseInt(transforms[0]);
+            cn.cx = Math.round(cn.cx * 10) / 10;
+            if (transforms.length == 2) {
+              cn.cy = parseInt(cn.cy) + parseInt(transforms[1]);
+              cn.cy = Math.round(cn.cy * 10) / 10;
+            }
+            delete cn.transform;
+            delete cn.fill;
+          }
+          nodes[i].$ = cn;
+        }
+        xml.svg.g[0].circle = nodes;
+        return xml;
+      })
+    )
+    .pipe(gulp.dest('dist/img/'));
 });
 ```
 
