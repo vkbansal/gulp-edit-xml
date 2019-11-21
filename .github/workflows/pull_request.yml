@@ -7,7 +7,7 @@ jobs:
   lint:
     name: ESLint
     runs-on: ubuntu-latest
-    if: !contains(github.event.pull_request.title , '[skip ci]')
+    #if: !contains(github.event.pull_request.title , '[skip ci]')
     steps:
       - name: Checkout
         uses: actions/checkout@v1
@@ -18,7 +18,7 @@ jobs:
   test:
     name: Unit tests
     runs-on: ubuntu-latest
-    if: !contains(github.event.pull_request.title , '[skip ci]')
+    #if: !contains(github.event.pull_request.title , '[skip ci]')
     steps:
       - name: Checkout
         uses: actions/checkout@v1
