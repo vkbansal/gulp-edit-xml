@@ -1,6 +1,6 @@
 {
   "name": "gulp-edit-xml",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "Gulp plugin for editing xml files",
   "main": "index.js",
   "types": "index.d.ts",
@@ -31,9 +31,9 @@
   "homepage": "https://github.com/vkbansal/gulp-edit-xml",
   "dependencies": {
     "@types/xml2js": "^0.4.5",
+    "lodash.defaultsdeep": "^4.6.1",
     "lodash.isfunction": "^3.0.6",
     "lodash.isobject": "^3.0.2",
-    "lodash.defaultsdeep": "^4.6.1",
     "plugin-error": "^1.0.1",
     "xml2js": "^0.4.8"
   },
