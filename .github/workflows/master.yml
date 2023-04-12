@@ -7,22 +7,16 @@ jobs:
   lint:
     name: ESLint
     runs-on: ubuntu-latest
-    #if: !contains(github.event.pull_request.title , '[skip ci]')
     steps:
-      - name: Checkout
-        uses: actions/checkout@v1
+      - name: Setup
+        uses: ./.github/workflows/setup.yml
       - name: Lint Check
-        run: |
-          yarn
-          yarn lint
+        run: pnpm run lint
   test:
     name: Unit tests
     runs-on: ubuntu-latest
-    #if: !contains(github.event.pull_request.title , '[skip ci]')
     steps:
-      - name: Checkout
-        uses: actions/checkout@v1
+      - name: Setup
+        uses: ./.github/workflows/setup.yml
       - name: Test
-        run: |
-          yarn
-          yarn test
+        run: pnpm run test
